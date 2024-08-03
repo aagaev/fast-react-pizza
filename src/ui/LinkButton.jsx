@@ -1,11 +1,12 @@
 import { Link, useNavigate,  } from "react-router-dom"
 import PropTypes from 'prop-types'
+
 function LinkButton({children, to}) {
     LinkButton.propTypes = {
         children: PropTypes.any,
         to: PropTypes.any
     };
-    console.log(to)
+    // console.log(to)
     const navigate = useNavigate();
     const className = 'text-sm text-red-500 hover:text-blue-600 hover:underline';
 

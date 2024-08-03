@@ -10,6 +10,7 @@ import Error from "./ui/Error";
 import AppLayout from "./ui/AppLayout";
 
 import "./index.css";
+
 const router = createBrowserRouter([
   {
     element: <AppLayout />,

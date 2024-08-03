@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+
 function Button({ children, disabled, to, type }) {
   Button.propTypes = {
     children: PropTypes.any,
