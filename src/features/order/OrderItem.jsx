@@ -7,10 +7,12 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
     ingredients: PropTypes.any,
   };
   const { quantity, name, totalPrice } = item;
-  const cashe = { isLoadingIngredients, ingredients };
-  console.log(cashe);
+  // const cashe = { isLoadingIngredients, ingredients };
+  // console.log(cashe);
   return (
     <li className="py-3">
+      {isLoadingIngredients}
+      {ingredients}
       <div className="flex items-center justify-between gap-4 text-sm">
         <p>
           <span className="font-bold">{quantity}&times;</span> {name}

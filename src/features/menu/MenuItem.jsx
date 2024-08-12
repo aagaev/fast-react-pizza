@@ -1,11 +1,35 @@
 import { formatCurrency } from "../../utils/helper";
+// import {
+//   addItem,
+//   deleteItem,
+//   decreaseItemQuantity,
+//   increaseItemQuantity,
+//   clearCart,
+// } from "../cart/cartSlice";
 import Button from "../../ui/Button";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, getCurrentQuantityById } from "../cart/cartSlice";
+import DeleteItem from "../cart/DeleteItem";
+import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 
 function MenuItem({ pizza }) {
-  MenuItem.propTypes = {
-    pizza: PropTypes.any,
-  };
+  const dispatch = useDispatch();
+  const currentQuantity = useSelector(getCurrentQuantityById(pizza.id));
+  const isInCart = currentQuantity > 0;
+  // console.log(isInCart)
+  function handleAddToCart() {
+    const { id, name, unitPrice } = pizza;
+
+    const newItem = {
+      pizzaId: id,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  }
   // const {  name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   return (
     <li className="flex gap-4 py-2">
@@ -27,7 +51,22 @@ function MenuItem({ pizza }) {
               Sold out
             </p>
           )}
-          <Button type="small"> Add to cart</Button>
+
+          {isInCart && (
+            <div className="flex items-center gap-3 sm:gap-8">
+              <DeleteItem pizzaId={pizza.id} />
+              <UpdateItemQuantity
+                pizzaId={pizza.id}
+                currentQuantity={currentQuantity}
+              />
+            </div>
+          )}
+
+          {!pizza.soldOut && !isInCart && (
+            <Button type="small" onClick={handleAddToCart}>
+              Add to cart
+            </Button>
+          )}
         </div>
       </div>
     </li>
@@ -35,3 +74,6 @@ function MenuItem({ pizza }) {
 }
 
 export default MenuItem;
+MenuItem.propTypes = {
+  pizza: PropTypes.any,
+};

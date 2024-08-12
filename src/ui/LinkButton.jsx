@@ -17,7 +17,7 @@ function LinkButton({children, to}) {
       </button>
     );
 
-  return (
+  return ( 
     <Link to={to} className={className}>
       {children}
     </Link>
